@@ -43,7 +43,7 @@ public class PumpCommandService {
 
     // 특정 식물에 대한 PENDING 명령 조회 (선택 사항)
     public Optional<PumpCommand> getPendingCommandForPlant(Long plantId) {
-        return pumpCommandRepository.findByPlantIdAndStatusOrderByCreatedAtAsc(plantId, PumpCommand.CommandStatus.PENDING)
+        return pumpCommandRepository.findByPlant_IdAndStatusOrderByCreatedAtAsc(plantId, PumpCommand.CommandStatus.PENDING)
                 .stream().findFirst(); // 여러 개 있을 수 있지만, 여기서는 가장 오래된 하나만
     }
 

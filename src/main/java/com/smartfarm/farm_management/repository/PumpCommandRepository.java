@@ -14,6 +14,6 @@ public interface PumpCommandRepository extends JpaRepository<PumpCommand, Long> 
     // 라즈베리 파이가 폴링할 때 사용
     List<PumpCommand> findByStatusOrderByCreatedAtAsc(PumpCommand.CommandStatus status);
     List<PumpCommand> findByStatusAndScheduledTimeBeforeOrderByCreatedAtAsc(PumpCommand.CommandStatus status, LocalDateTime now);
-    List<PumpCommand> findByPlantIdAndStatusOrderByCreatedAtAsc(Long plantId, PumpCommand.CommandStatus status);
+    List<PumpCommand> findByPlant_IdAndStatusOrderByCreatedAtAsc(Long plantId, PumpCommand.CommandStatus status);
     List<PumpCommand> findByPlantOrderByCreatedAtAsc(Plant plant);
 }
