@@ -51,7 +51,7 @@ public class PumpCommandController {
     @Autowired
     private PumpCommandService pumpCommandService;
 
-    @Operation(summary = "워터 펌프 작동 명령 생성", description = "사용자 또는 관리자가 웹을 통해 워터 펌프에 관수 명령을 요청합니다. 생성된 명령은 `PENDING` 상태로 저장되며, 라즈베리 파이가 주기적으로 확인하여 처리합니다.",
+    @Operation(summary = "[웹 API] 워터 펌프 작동 명령 생성", description = "사용자 또는 관리자가 웹을 통해 워터 펌프에 관수 명령을 요청합니다. 생성된 명령은 `PENDING` 상태로 저장되며, 라즈베리 파이가 주기적으로 확인하여 처리합니다.",
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "새로운 워터 펌프 명령 정보. 관수량, 방법, 대상 식물 ID가 필요하며, 예약 관수 시간을 지정할 수 있습니다.", required = true,
                     content = @Content(schema = @Schema(implementation = PumpCommandRequest.class),
                             examples = {
@@ -76,23 +76,7 @@ public class PumpCommandController {
         }
     }
 
-    @Operation(summary = "대기 중인 펌프 명령 조회 (라즈베리 파이 폴링용)", description = "라즈베리 파이가 주기적으로 호출하여 현재 `PENDING` 상태의 관수 명령 목록을 가져갑니다. **예약 시간이 현재 시간을 지난 명령만 반환**됩니다.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "처리해야 할 대기 중인 펌프 명령 목록 반환",
-                    content = @Content(schema = @Schema(implementation = PumpCommand.class))),
-            @ApiResponse(responseCode = "204", description = "현재 처리할 대기 중인 펌프 명령이 없습니다 (No Content)."),
-            @ApiResponse(responseCode = "500", description = "서버 내부 오류 발생")
-    })
-    @GetMapping("/pending")
-    public ResponseEntity<List<PumpCommand>> getPendingCommands() {
-        List<PumpCommand> pendingCommands = pumpCommandService.getPendingCommands();
-        if (pendingCommands.isEmpty()) {
-            return ResponseEntity.noContent().build(); // 처리할 명령이 없으면 204 No Content
-        }
-        return ResponseEntity.ok(pendingCommands);
-    }
-
-    @Operation(summary = "펌프 명령 실행 완료 상태 업데이트", description = "라즈베리 파이가 특정 펌프 명령을 성공적으로 실행한 후, 해당 명령의 상태를 `EXECUTED`로 업데이트합니다. 이 API는 명령의 상태만 변경하며, 실제 관수 기록은 별도로 `/api/watering/log` 엔드포인트로 전송해야 합니다.",
+    @Operation(summary = "[라즈베리파이 API] 펌프 명령 실행 완료 상태 업데이트", description = "라즈베리 파이가 특정 펌프 명령을 성공적으로 실행한 후, 해당 명령의 상태를 `EXECUTED`로 업데이트합니다. 이 API는 명령의 상태만 변경하며, 실제 관수 기록은 별도로 `/api/watering/log` 엔드포인트로 전송해야 합니다.",
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "실행이 완료된 펌프 명령의 ID 및 실제 관수된 양 (선택 사항)", required = true,
                     content = @Content(schema = @Schema(implementation = CommandExecutedRequest.class),
                             examples = @ExampleObject(name = "Command Execution Example", value = "{\"commandId\":123, \"actualAmountMl\":145}"))))
@@ -112,7 +96,7 @@ public class PumpCommandController {
         }
     }
 
-    @Operation(summary = "모든 펌프 명령 기록 조회", description = "시스템에 생성된 **모든 펌프 명령의 기록**을 조회합니다. 이 API는 주로 관리자 또는 시스템 모니터링을 위해 사용됩니다.")
+    @Operation(summary = "[웹,라즈베리파이 API] 모든 펌프 명령 기록 조회", description = "시스템에 생성된 **모든 펌프 명령의 기록**을 조회합니다. 이 API는 주로 관리자 또는 시스템 모니터링을 위해 사용됩니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "모든 펌프 명령 기록을 성공적으로 조회했습니다.",
                     content = @Content(schema = @Schema(implementation = PumpCommand.class))),
@@ -124,7 +108,7 @@ public class PumpCommandController {
         return ResponseEntity.ok(commands);
     }
 
-    @Operation(summary = "특정 식물의 펌프 명령 기록 조회", description = "지정된 **식물 ID**에 대해 생성된 모든 펌프 명령 기록을 조회합니다.")
+    @Operation(summary = "[웹 API] 특정 식물의 펌프 명령 기록 조회", description = "지정된 **식물 ID**에 대해 생성된 모든 펌프 명령 기록을 조회합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "특정 식물의 펌프 명령 기록을 성공적으로 조회했습니다.",
                     content = @Content(schema = @Schema(implementation = PumpCommand.class))),

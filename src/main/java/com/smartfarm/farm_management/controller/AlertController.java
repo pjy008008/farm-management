@@ -25,7 +25,7 @@ public class AlertController {
     @Autowired
     private AlertService alertService;
 
-    @Operation(summary = "특정 식물의 모든 경고 조회", description = "지정된 **식물 ID**에 대해 발생한 모든 경고 기록을 **최신순**으로 조회합니다. 이는 온도, 습도, 토양 수분 등 모든 센서 유형의 경고를 포함합니다.")
+    @Operation(summary = "[웹 API] 특정 식물의 모든 경고 조회", description = "지정된 **식물 ID**에 대해 발생한 모든 경고 기록을 **최신순**으로 조회합니다. 이는 온도, 습도, 토양 수분 등 모든 센서 유형의 경고를 포함합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "경고 로그 목록을 성공적으로 조회했습니다.",
                     content = @Content(schema = @Schema(implementation = Alert.class),
@@ -45,7 +45,7 @@ public class AlertController {
         }
     }
 
-    @Operation(summary = "특정 식물의 센서 유형별 경고 조회", description = "지정된 **식물 ID**와 **센서 유형**에 대해 발생한 경고 기록을 **최신순**으로 조회합니다. 센서 유형은 'temp', 'humidity', 'soil_moisture' 중 하나입니다.")
+    @Operation(summary = "[웹 API] 특정 식물의 센서 유형별 경고 조회", description = "지정된 **식물 ID**와 **센서 유형**에 대해 발생한 경고 기록을 **최신순**으로 조회합니다. 센서 유형은 'temp', 'humidity', 'soil_moisture' 중 하나입니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "센서 유형별 경고 로그 목록을 성공적으로 조회했습니다.",
                     content = @Content(schema = @Schema(implementation = Alert.class),

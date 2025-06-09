@@ -26,7 +26,7 @@ public class PlantController {
     @Autowired
     private PlantService plantService;
 
-    @Operation(summary = "모든 식물 정보 조회", description = "시스템에 등록된 **모든 식물**의 상세 정보를 목록 형태로 조회합니다.")
+    @Operation(summary = "[웹 API] 모든 식물 정보 조회", description = "시스템에 등록된 **모든 식물**의 상세 정보를 목록 형태로 조회합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "모든 식물 정보를 성공적으로 조회했습니다.",
                     content = @Content(schema = @Schema(implementation = Plant.class),
@@ -39,7 +39,7 @@ public class PlantController {
         return ResponseEntity.ok(plants);
     }
 
-    @Operation(summary = "특정 식물 정보 조회", description = "**식물 ID**를 사용하여 특정 식물의 상세 정보를 조회합니다.")
+    @Operation(summary = "[웹 API] 특정 식물 정보 조회", description = "**식물 ID**를 사용하여 특정 식물의 상세 정보를 조회합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "요청한 식물 정보를 성공적으로 찾았습니다.",
                     content = @Content(schema = @Schema(implementation = Plant.class),
@@ -55,7 +55,7 @@ public class PlantController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @Operation(summary = "새로운 식물 정보 추가", description = "**새로운 식물 정보**를 시스템에 등록합니다. 이 작업은 주로 관리자에 의해 수행됩니다. `id` 필드는 자동 생성되므로 요청 본문에 포함하지 마세요.",
+    @Operation(summary = "[웹 API] 새로운 식물 정보 추가", description = "**새로운 식물 정보**를 시스템에 등록합니다. 이 작업은 주로 관리자에 의해 수행됩니다. `id` 필드는 자동 생성되므로 요청 본문에 포함하지 마세요.",
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "새롭게 등록할 식물의 상세 정보. 적정 환경 기준(온도, 습도, 토양 수분)을 포함할 수 있습니다.", required = true,
                     content = @Content(schema = @Schema(implementation = Plant.class),
                             examples = @ExampleObject(name = "New Plant Example", value = "{\"name\":\"딸기\", \"plantType\":\"과채류\", \"minTemp\":18.0, \"maxTemp\":28.0, \"minHumidity\":65.0, \"maxHumidity\":85.0, \"minSoilMoisture\":35.0, \"maxSoilMoisture\":75.0}"))))
@@ -70,7 +70,7 @@ public class PlantController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPlant);
     }
 
-    @Operation(summary = "식물 정보 업데이트", description = "기존에 등록된 식물의 **부분 또는 전체 정보**를 업데이트합니다. 식물 ID를 사용하여 대상을 지정합니다. 이 작업은 주로 관리자에 의해 수행됩니다.",
+    @Operation(summary = "[웹 API] 식물 정보 업데이트", description = "기존에 등록된 식물의 **부분 또는 전체 정보**를 업데이트합니다. 식물 ID를 사용하여 대상을 지정합니다. 이 작업은 주로 관리자에 의해 수행됩니다.",
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "업데이트할 식물의 새로운 정보. 변경하고자 하는 필드만 포함할 수 있습니다.", required = true,
                     content = @Content(schema = @Schema(implementation = Plant.class),
                             examples = @ExampleObject(name = "Update Plant Example", value = "{\"name\":\"토마토 (품종 개량)\", \"maxTemp\":32.0, \"minSoilMoisture\":40.0}"))))
@@ -93,7 +93,7 @@ public class PlantController {
         }
     }
 
-    @Operation(summary = "식물 정보 삭제", description = "**식물 ID**를 통해 특정 식물의 모든 정보를 시스템에서 영구적으로 삭제합니다. 이 작업은 신중하게 수행해야 합니다. (관리자용)")
+    @Operation(summary = "[웹 API] 식물 정보 삭제", description = "**식물 ID**를 통해 특정 식물의 모든 정보를 시스템에서 영구적으로 삭제합니다. 이 작업은 신중하게 수행해야 합니다. (관리자용)")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "식물 정보가 성공적으로 삭제되었습니다. (No Content)"),
             @ApiResponse(responseCode = "404", description = "삭제하려는 식물 ID를 찾을 수 없습니다.")

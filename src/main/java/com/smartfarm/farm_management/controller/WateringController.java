@@ -37,7 +37,7 @@ public class WateringController {
     @Autowired
     private WateringLogService wateringLogService;
 
-    @Operation(summary = "워터 펌프 작동 기록", description = "라즈베리 파이에서 워터 펌프 작동이 완료된 후, 해당 관수 이력을 백엔드에 기록합니다. 이 기록은 관수량, 관수 방법, 대상 식물 정보를 포함합니다.")
+    @Operation(summary = "[라즈베리파이 API] 워터 펌프 작동 기록", description = "라즈베리 파이에서 워터 펌프 작동이 완료된 후, 해당 관수 이력을 백엔드에 기록합니다. 이 기록은 관수량, 관수 방법, 대상 식물 정보를 포함합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "관수 기록이 성공적으로 저장되었습니다."),
             @ApiResponse(responseCode = "400", description = "요청 본문의 형식이 잘못되었거나 필수 필드가 누락되었습니다 (예: 유효하지 않은 식물 ID)."),
@@ -57,7 +57,7 @@ public class WateringController {
         }
     }
 
-    @Operation(summary = "특정 식물의 관수 기록 조회", description = "지정된 **식물 ID**에 대해 모든 관수 기록을 **최신순**으로 조회합니다. 이 API는 특정 식물의 관수 이력을 추적하는 데 사용됩니다.")
+    @Operation(summary = "[웹 API] 특정 식물의 관수 기록 조회", description = "지정된 **식물 ID**에 대해 모든 관수 기록을 **최신순**으로 조회합니다. 이 API는 특정 식물의 관수 이력을 추적하는 데 사용됩니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "관수 기록 목록을 성공적으로 조회했습니다.",
                     content = @Content(schema = @Schema(implementation = WateringLog.class),

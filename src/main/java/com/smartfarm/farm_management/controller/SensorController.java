@@ -42,7 +42,7 @@ public class SensorController {
     @Autowired
     private PlantStatusLogService plantStatusLogService;
 
-    @Operation(summary = "센서 데이터 수신 및 기록", description = "라즈베리 파이에서 측정된 DHT-22 (온도, 습도) 및 FC-28 (토양 수분) 센서 데이터를 수신하여 DB에 기록합니다. 데이터를 기록한 후, 시스템은 해당 식물의 적정 환경 기준과 비교하여 자동으로 경고를 생성합니다.")
+    @Operation(summary = "[라즈베리파이 API] 센서 데이터 수신 및 기록", description = "라즈베리 파이에서 측정된 DHT-22 (온도, 습도) 및 FC-28 (토양 수분) 센서 데이터를 수신하여 DB에 기록합니다. 데이터를 기록한 후, 시스템은 해당 식물의 적정 환경 기준과 비교하여 자동으로 경고를 생성합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "센서 데이터가 성공적으로 수신 및 처리되어 기록되었습니다."),
             @ApiResponse(responseCode = "400", description = "요청 본문의 형식이 잘못되었거나 필수 필드가 누락되었습니다 (예: 유효하지 않은 식물 ID)."),
@@ -64,7 +64,7 @@ public class SensorController {
         }
     }
 
-    @Operation(summary = "특정 식물의 최신 센서 로그 조회", description = "지정된 **식물 ID**에 대한 최신 센서 데이터 기록들을 **최신순**으로 조회합니다. 이 API는 특정 식물의 현재 상태를 빠르게 파악하는 데 유용합니다.")
+    @Operation(summary = "[웹 API] 특정 식물의 최신 센서 로그 조회", description = "지정된 **식물 ID**에 대한 최신 센서 데이터 기록들을 **최신순**으로 조회합니다. 이 API는 특정 식물의 현재 상태를 빠르게 파악하는 데 유용합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "센서 로그 목록을 성공적으로 조회했습니다.",
                     content = @Content(schema = @Schema(implementation = PlantStatusLog.class),
@@ -84,7 +84,7 @@ public class SensorController {
         }
     }
 
-    @Operation(summary = "특정 식물의 센서 로그 시간 범위 조회", description = "지정된 **식물 ID**와 **특정 시간 범위** 내에 기록된 센서 데이터 로그들을 조회합니다. `start`와 `end` 파라미터로 시간 범위를 지정할 수 있습니다. 결과는 오래된 순으로 정렬됩니다.")
+    @Operation(summary = "[웹 API] 특정 식물의 센서 로그 시간 범위 조회", description = "지정된 **식물 ID**와 **특정 시간 범위** 내에 기록된 센서 데이터 로그들을 조회합니다. `start`와 `end` 파라미터로 시간 범위를 지정할 수 있습니다. 결과는 오래된 순으로 정렬됩니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "지정된 시간 범위 내 센서 로그 목록을 성공적으로 조회했습니다.",
                     content = @Content(schema = @Schema(implementation = PlantStatusLog.class))),
