@@ -54,6 +54,9 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 세션 사용 안 함 (JWT 스테이트리스)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/auth/**").permitAll() // /api/auth/** 경로는 인증 없이 접근 허용 (회원가입, 로그인)
+                        .requestMatchers("/api/sensors/data").permitAll()
+                        .requestMatchers("/api/watering/log").permitAll()
+                        .requestMatchers("/api/pump_commands").permitAll()
                         .requestMatchers(
                                 "/v3/api-docs/**",           // OpenAPI 3.0 docs
                                 "/swagger-ui/**",            // Swagger UI
