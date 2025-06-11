@@ -57,6 +57,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/sensors/data").permitAll()
                         .requestMatchers("/api/watering/log").permitAll()
                         .requestMatchers("/api/pump_commands").permitAll()
+                        .requestMatchers("/api/pump_commands/execute").permitAll()
                         .requestMatchers(
                                 "/v3/api-docs/**",           // OpenAPI 3.0 docs
                                 "/swagger-ui/**",            // Swagger UI
